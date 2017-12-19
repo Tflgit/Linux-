@@ -1,0 +1,110 @@
+一、Shall基础
+1 结束命令的快捷键
+  Ctrl+d	键盘输入结束或退出终端
+  Ctrl+s	暂停当前程序，暂停后按下任意键恢复运行
+  Ctrl+z	将当前程序放到后台运行，恢复到前台为命令fg
+  Ctrl+a	将光标移至输入行头，相当于Home键
+  Ctrl+e	将光标移至输入行末，相当于End键
+  Ctrl+k	删除从光标所在位置到行末
+  Alt+Backspace	向前删除一个单词
+  Shift+PgUp	将终端显示向上滚动
+  Shift+PgDn	将终端显示向下滚动
+2 Tab键上下翻页键
+3 通配符
+  *	匹配 0 或多个字符
+  ?	匹配任意一个字符
+  [list]	匹配 list 中的任意单一字符
+  [!list]	匹配 除list 中的任意单一字符以外的字符
+  [c1-c2]	匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
+  {string1,string2,...}	匹配 string1 或 string2 (或更多)其一字符串
+  {c1..c2}	匹配 c1-c2 中全部字符 如{1..10}
+4 帮助命令
+  whatis ls
+  ls --help
+  man ls
+  info ls
+二、用户、权限、文件与磁盘
+1 查看用户who选项
+  -a	打印能打印的全部
+  -d	打印死掉的进程
+  -m	同am i,mom likes
+  -q	打印当前登录用户数及用户名
+  -u	打印当前登录用户登录信息
+  -r	打印运行等级
+2 用户相关操作
+  sudo <cmd>普通用户执行特权命令
+  su <user>切换到user用户
+  sudo adduser <username>添加用户
+  su -l <username>切换到用户
+3 用户组文件与权限
+4 文件创建、移动、删除、查看
+  cat tac nl查看文件
+  more less分页查看文件
+  head tail查看文件
+  file 查看文件类型
+  vim编辑文件
+5 搜索文件
+  where <pattern>从数据库查找二进制文件
+  locate ... 
+  which软件命令查找
+  find <path> -option value -name <...> 从path路径中查找
+  find参数	说明
+  -atime	最后访问时间
+  -ctime	最后修改文件内容的时间
+  -mtime	最后修改文件属性的时间
+6 文件打包压缩
+  zip -参数(-r打包子目录文件) -o <output> <file> 打包压缩file为output
+  unzip <file> -d <path> 将file解压到path
+  tar压缩与解压缩命令
+  参数
+  -c 压缩文件 -f 指定文件名 -x 解包 -C 指定目录 -t不解压查看压缩文件
+  -z 使用gzip工具压缩与解压缩*.tar.gz文件
+7 文件与磁盘
+  df 查看磁盘容量 -h (human-readable)
+  du 查看目录容量 -d <n> 显示n级子目录
+三、管道与数据流
+1 管道
+  cmd1 | cmd2 将cmd1的输出作为cmd2的输入
+  cut <file> ... 打印file文件中每行符合特定要求的某些字段（选项查看帮助）
+  grep [选项] pattern <file> 选项 -r 递归子目录 -n 打印行号 -I 忽略二进制文件
+  wc统计命令 -l 行数 -w 单词数 -c 字节数 -m 字符数 -L 最长行字符数
+  sort 将输入按照要求排序
+  -t 参数用于指定字段的分隔符
+  -k 字段号用于指定对哪一个字段进行排序
+  -n 按照数字排序（指定字段为数字），默认情况下是以字典序排序的
+  uniq 过滤重复行 -dc 输出重复过的行，及重复次数
+2 数据流重定向
+  > 左边输出重定向到右边
+  >> 左边输出追加的方式重定向到右边
+  Linux 默认三个设备
+  0	/dev/stdin	标准输入
+  1	/dev/stdout	标准输出
+  2	/dev/stderr	标准错误
+  /dev/null 屏蔽
+  例如 cat log.txt > file ; ./flap 2 > &1(标准错误重定向到标准输出)
+3 软件包管理
+  apt-get 与 apt-cache 具体查看帮助
+四、进程
+1 基本查看
+  ps 查看进程列表
+  pstree 查看进程树结构
+  jobs 当前控制台的任务（进程）
+2 前后台切换
+  前台进程 ctrl + z 到后台
+  fg %jobnumber 指定工作号的job到前台
+  kill 终止进程
+3 查看
+  top工具
+  进程信息
+  PID	进程id
+  USER	该进程的所属用户
+  PR	该进程执行的优先级 priority 值
+  NI	该进程的 nice 值（静态优先级）
+  VIRT	该进程任务所使用的虚拟内存的总数
+  RES	该进程所使用的物理内存数，也称之为驻留内存数
+  SHR	该进程共享内存的大小
+  S	该进程进程的状态: S=sleep R=running Z=zombie
+  %CPU	该进程CPU的利用率
+  %MEM	该进程内存的利用率
+  TIME+	该进程活跃的总时间
+  COMMAND	该进程运行的名字
